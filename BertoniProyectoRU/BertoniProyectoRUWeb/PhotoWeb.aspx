@@ -7,13 +7,22 @@
                 url: "https://jsonplaceholder.typicode.com/comments/" + commentID,
                 method: "GET"
             }).then(function (data) {
-                var commentJsonObject = JSON.parse(data);
-                console.log(data);
-                console.log(comment);
+                var commentJsonObject = JSON.stringify(data);
                 console.log(commentJsonObject);
-                var bodyStr = comment.body
+                DisplayCommentInGrid(commentJsonObject);
             });
 
+        }
+
+        function DisplayCommentInGrid(comments) {
+            console.log(comments);
+            $.ajax({
+                url: "PhotoWeb.aspx/DisplayCommentAbove",
+                method: "POST",
+                data: comments,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            });
         }
     </script>
     <h2>Photos</h2>
