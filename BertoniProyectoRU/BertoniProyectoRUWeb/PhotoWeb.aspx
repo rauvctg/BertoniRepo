@@ -17,7 +17,7 @@
         function DisplayCommentInGrid(comments) {
             console.log(comments);
             $.ajax({
-                url: "PhotoWeb.aspx/DisplayCommentAbove",
+                url: "/PhotoWeb.aspx/DisplayCommentAbove?comments=" + comments ,
                 method: "POST",
                 data: comments,
                 contentType: "application/json; charset=utf-8",

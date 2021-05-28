@@ -25,6 +25,9 @@ namespace BertoniProyectoRUWeb
         {
             var albumID = Request.QueryString["ai"];
 
+            if (albumID == null)
+                return;
+
             WebRequest request = WebRequest.Create("https://jsonplaceholder.typicode.com/photos");
             request.Method = "GET";
             WebResponse response = request.GetResponse();
@@ -57,7 +60,7 @@ namespace BertoniProyectoRUWeb
         }
 
         [WebMethod(true)]
-        public void DisplayCommentAbove(Comment comment)
+        public static void DisplayCommentAbove(string comment)
         {
 
         }
