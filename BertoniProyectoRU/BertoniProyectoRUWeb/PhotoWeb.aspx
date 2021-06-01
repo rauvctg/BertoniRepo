@@ -7,22 +7,19 @@
                 url: "https://jsonplaceholder.typicode.com/comments/" + commentID,
                 method: "GET"
             }).then(function (data) {
-                var commentJsonObject = JSON.stringify(data);
-                console.log(commentJsonObject);
-                DisplayCommentInGrid(commentJsonObject);
+                if (data !== 'undefined' && data !== '' && data !== null) {
+                    $("#postIdlabel").text(data.postId);
+                    $("#bodyText").text(data.body);
+                    $("#emailText").text(data.email);
+                    $("#idText").text(data.id);
+                    $("#nameText").text(data.name);
+
+                    $('html,body').animate({
+                        scrollTop: $(".downra").offset().top
+                    },'slow');
+                }
             });
 
-        }
-
-        function DisplayCommentInGrid(comments) {
-            console.log(comments);
-            $.ajax({
-                url: "/PhotoWeb.aspx/DisplayCommentAbove?comments=" + comments ,
-                method: "POST",
-                data: comments,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-            });
         }
     </script>
     <h2>Photos</h2>
@@ -42,10 +39,41 @@
             </asp:BoundColumn>
             <asp:TemplateColumn>
                 <ItemTemplate>
-                    <asp:Button Text="Ver Comentarios" CssClass="btn btn-primary" runat="server" ID="btnVerComentarios" CommandArgument='<%# Eval("id") %>' OnClick="btnVerComentarios_Click" />
+                    <input type="button" value="Ver Comentarios" class="btn btn-primary" ID="btnVerComentarios" onclick='VerComentarios(<%# Eval("id") %>)' />
                 </ItemTemplate>
             </asp:TemplateColumn>
         </Columns>
     </asp:DataGrid>
-    
+
+    <h2>Comentarios</h2>
+    <div class="form-group downra row" id="divComentarios">
+        <label class="col-sm-2 col-form-label">PostID</label>
+        <div class="col-sm-4">
+          <label style="font-weight:normal !important;" id="postIdlabel"></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Body</label>
+        <div class="col-sm-4">
+          <label style="font-weight:normal !important;" id="bodyText"></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-4">
+          <label style="font-weight:normal !important;" id="emailText"></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Id</label>
+        <div class="col-sm-4">
+          <label style="font-weight:normal !important;" id="idText"></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-4">
+          <label style="font-weight:normal !important;" id="nameText"></label>
+        </div>
+    </div>
 </asp:Content>

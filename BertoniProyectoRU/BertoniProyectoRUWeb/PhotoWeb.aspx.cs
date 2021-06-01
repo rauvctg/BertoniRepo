@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -47,21 +48,6 @@ namespace BertoniProyectoRUWeb
                 grdPhotos.DataSource = photoFound;
                 grdPhotos.DataBind();
             }
-
-        }
-
-        protected void btnVerComentarios_Click(object sender, EventArgs e)
-        {
-            var buttonControl = (Button)sender;
-            var photoID = buttonControl.CommandArgument;
-
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "VerComentarios", "VerComentarios(" + photoID + ")", true);
-
-        }
-
-        [WebMethod(true)]
-        public static void DisplayCommentAbove(string comment)
-        {
 
         }
     }
